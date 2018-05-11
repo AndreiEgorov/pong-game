@@ -1,4 +1,5 @@
 
+import Score from './Score'
 import Ball from './Ball.js'
 import Board from './Board.js' //may also not put ".js" in it
 import Paddle from './Paddle.js'//
@@ -20,9 +21,11 @@ export default class Game {
 
 
 
+
 		this.paddleWidth = 8;
 		this.paddleHeight = 56;
 		this.boardGap = 10;
+
 
 		this.player1 = new Paddle(
 			this.height,
@@ -45,10 +48,19 @@ export default class Game {
 			KEYS.down,
 		);
 
+		this.score1 = new Score(this.width / 2 - 50, 30, 30);
+		this.score2 = new Score(this.width / 2 + 25, 30, 30);
 
+		//to pause the game_ Part1/2_______________
+		this.pause = false;
 
-		// console.log(this.player1);
+		document.addEventListener("keydown", event => {
+			if (event.key == KEYS.spaceBar) {
+				this.pause = !this.pause;
 
+			}
+		});
+		//________________
 
 
 
@@ -56,6 +68,13 @@ export default class Game {
 	}
 
 	render() {
+
+		//to pause the game__Part 2/2__________
+		if (this.pause) {
+			return;
+		}
+		//____________-
+
 		// More code goes here...
 		this.gameElement.innerHTML = '';
 
@@ -72,6 +91,8 @@ export default class Game {
 
 		this.ball.render(svg, this.player1, this.player2);
 
+		this.score1.render(svg, this.player1.score);
+		this.score2.render(svg, this.player2.score);
 
 
 	}

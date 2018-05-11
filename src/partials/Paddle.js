@@ -36,6 +36,16 @@ export default class Paddle {
     }
 
 
+    //helper method to 
+    coordinates(x, y, width, height) {
+        let leftX = x;
+        let rightX = x + width;
+        let topY = y;
+        let bottomY = y + height;
+        return [leftX, rightX, topY, bottomY];
+    }
+
+
 
     render(svg) {
         let rect = document.createElementNS(SVG_NS, 'rect');
