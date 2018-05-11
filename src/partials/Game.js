@@ -34,7 +34,8 @@ export default class Game {
 			this.boardGap,
 			((this.height - this.paddleHeight) / 2),
 			KEYS.a,
-			KEYS.z
+			KEYS.z,
+			'player1',
 
 		);
 
@@ -46,6 +47,7 @@ export default class Game {
 			((this.height - this.paddleHeight) / 2),
 			KEYS.up,
 			KEYS.down,
+			'player2',
 		);
 
 		this.score1 = new Score(this.width / 2 - 50, 30, 30);
