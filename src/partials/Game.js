@@ -1,4 +1,5 @@
 
+import Name from './Setup';
 import Score from './Score'
 import Ball from './Ball.js'
 import Board from './Board.js' //may also not put ".js" in it
@@ -11,8 +12,10 @@ export default class Game {
 		this.width = width;
 		this.height = height;
 
+
 		this.gameElement = document.getElementById(this.element);
 		// Other code goes here...
+
 
 
 
