@@ -3,7 +3,7 @@
 
 
 
-import Steelball from './SteelBall';
+import boulderBall from './BoulderBall';
 import Score from './Score';
 import Ball from './Ball.js';
 import Board from './Board.js'; //may also not put ".js" in it
@@ -28,7 +28,8 @@ export default class Game {
 
 
 		this.ball = new Ball(8, 'red', this.width, this.height);
-		this.steelball = new Steelball(8, 'silver', this.width, this.height);
+		this.boulderBall1 = new boulderBall(8, 'silver', this.width, this.height);
+		this.boulderBall2 = new boulderBall(8, 'silver', this.width, this.height);
 
 
 
@@ -104,7 +105,9 @@ export default class Game {
 		this.player2.render(svg);
 
 		this.ball.render(svg, this.player1, this.player2);
-		this.steelball.render(svg, this.player1, this.player2);
+		this.boulderBall1.render(svg, this.player1, this.player2);
+		this.boulderBall2.render(svg, this.player1, this.player2);
+
 
 		this.score1.render(svg, this.player1.score);
 		this.score2.render(svg, this.player2.score);

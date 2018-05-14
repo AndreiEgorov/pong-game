@@ -1,13 +1,13 @@
 import { SVG_NS } from '../settings';
 
-export default class Steelball {
+export default class boulderBall {
     constructor(radius, fill, boardWidth, boardHeight) {
         this.ping = new Audio("public/sounds/pong-01.wav");
         this.fill = fill;
         this.radius = radius;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
-        this.direction = Math.random() * 10 - 6; //to make the ball move in both directions at a start
+        this.direction = (Math.random() * 10 - 5); //to make the ball move in both directions at a start
         this.reset();
 
     }
@@ -18,9 +18,9 @@ export default class Steelball {
 
         this.vy = 0;
         while (this.vy === 0) {
-            this.vy = Math.floor(Math.random() * 10 - 5);
+            this.vy = Math.floor(Math.random() * 10 - 5) / 6;//to slow down the Boulders
         }
-        this.vx = this.direction * (6 - Math.abs(this.vy)) / 5;
+        this.vx = this.direction * (6 - Math.abs(this.vy)) / 6;//to slow down the Boulderss
     }
 
     // Paddle Collision
@@ -39,6 +39,9 @@ export default class Steelball {
             ) {
                 this.vx = -this.vx;
                 this.ping.play();
+                this.goal(player2);
+
+
             }
 
         } else {
@@ -56,7 +59,8 @@ export default class Steelball {
                 (this.y >= topY && this.y <= bottomY)
             ) {
                 this.vx = -this.vx;
-                this.ping.play(); //to play sound
+                this.ping.play();//to play sound
+                this.goal(player1);
             }
 
         } else {
@@ -85,8 +89,8 @@ export default class Steelball {
 
     // Make score Part 1/2
     goal(player) {
-        player.score++;
-        this.reset();
+        player.score--;
+        // this.reset();
         console.log(player.score)
 
     }
