@@ -16,6 +16,7 @@ export default class Game {
 		this.width = width;
 		this.height = height;
 
+		this.ended = false;
 
 		this.gameElement = document.getElementById(this.element);
 		// Other code goes here...
@@ -82,6 +83,8 @@ export default class Game {
 
 	}
 
+
+
 	render() {
 
 		//to pause the game__Part 2/2__________
@@ -113,6 +116,12 @@ export default class Game {
 		this.score2.render(svg, this.player2.score);
 
 
+
+
+	}
+
+	stop() {
+		this.ended = true
 	}
 
 }

@@ -23,6 +23,10 @@ export default class Ball {
         this.vx = this.direction * (6 - Math.abs(this.vy));
     }
 
+
+
+
+
     // Paddle Collision
 
     paddleCollision(player1, player2) {

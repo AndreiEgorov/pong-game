@@ -23,6 +23,18 @@ export default class boulderBall {
         this.vx = this.direction * (6 - Math.abs(this.vy)) / 6;//to slow down the Boulderss
     }
 
+    // ballCollision(ball, boulderBall1, boulderBall2) {
+    //     if (this.vx > 0 || this.vy > 0)
+    //         if (
+    //             (this.thex >= this.x - this.radius) &&
+    //             (this.they >= this.y - this.radius) &&
+    //             (this.theradius >= this.radius)
+    //         ) {
+    //             this.vx = -this.vx;
+    //             this.ping.play();
+    //         }
+    // }
+
     // Paddle Collision
 
     paddleCollision(player1, player2) {
