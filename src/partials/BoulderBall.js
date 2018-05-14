@@ -1,48 +1,29 @@
 import { SVG_NS } from '../settings';
-
 export default class boulderBall {
     constructor(radius, fill, boardWidth, boardHeight) {
-        this.ping = new Audio("public/sounds/pong-01.wav");
+        this.ping = new Audio("public/sounds/pong-04.wav");
         this.fill = fill;
         this.radius = radius;
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         this.direction = (Math.random() * 10 - 5); //to make the ball move in both directions at a start
         this.reset();
-
     }
-
     reset() {
         this.x = this.boardWidth / 2;
         this.y = this.boardHeight / 2;
-
         this.vy = 0;
         while (this.vy === 0) {
             this.vy = Math.floor(Math.random() * 10 - 5) / 6;//to slow down the Boulders
         }
         this.vx = this.direction * (6 - Math.abs(this.vy)) / 6;//to slow down the Boulderss
     }
-
-    // ballCollision(ball, boulderBall1, boulderBall2) {
-    //     if (this.vx > 0 || this.vy > 0)
-    //         if (
-    //             (this.thex >= this.x - this.radius) &&
-    //             (this.they >= this.y - this.radius) &&
-    //             (this.theradius >= this.radius)
-    //         ) {
-    //             this.vx = -this.vx;
-    //             this.ping.play();
-    //         }
-    // }
-
     // Paddle Collision
-
     paddleCollision(player1, player2) {
         if (this.vx > 0) {
             //detect player2 paddle collision
             let paddle = player2.coordinates(player2.x, player2.y, player2.width, player2.height);
             let [leftX, rightX, topY, bottomY] = paddle;
-
             //Checking if the ball is >= left edge of the paddle
             if (
                 (this.x + this.radius >= leftX) &&
@@ -52,10 +33,7 @@ export default class boulderBall {
                 this.vx = -this.vx;
                 this.ping.play();
                 this.goal(player2);
-
-
             }
-
         } else {
             //...
         }
@@ -63,7 +41,6 @@ export default class boulderBall {
             //detect player1 paddle collision
             let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
             let [leftX, rightX, topY, bottomY] = paddle;
-
             //Checking if the ball is >= left edge of the paddle
             if (
                 (this.x - this.radius >= leftX) &&
@@ -74,17 +51,11 @@ export default class boulderBall {
                 this.ping.play();//to play sound
                 this.goal(player1);
             }
-
         } else {
             //...
         }
-
-
-
-
     }
     //___________
-
     wallCollision() {
         const hitLeft = this.x - this.radius <= 0;
         const hitRight = this.x + this.radius >= this.boardWidth;
@@ -96,49 +67,29 @@ export default class boulderBall {
         if (hitBottom || hitTop) {
             this.vy *= -1;
         }
-
     }
-
     // Make score Part 1/2
     goal(player) {
         player.score--;
         // this.reset();
         console.log(player.score)
-
     }
     // ______________________
-
-
-
-
-
     render(svg, player1, player2) {
-
-
-
         this.x += this.vx;
         this.y += this.vy;
-
-
         this.paddleCollision(player1, player2);
         this.wallCollision();
-
-
-
         let circle = document.createElementNS(SVG_NS, 'circle');
         circle.setAttributeNS(null, 'fill', this.fill);
         circle.setAttributeNS(null, 'r', this.radius);
         circle.setAttributeNS(null, 'cx', (this.x));
         circle.setAttributeNS(null, 'cy', (this.y)); //changed from this.boardHeight / 2
-
         svg.appendChild(circle);
-
         // Make score Part 1/2
         // Detect goal
         const rightGoal = this.paddleCollision(player1, player2);
-
         const leftGoal = this.paddleCollision(player1, player2);
-
         if (rightGoal) {
             this.goal(player1);
             this.direction = -1;
@@ -146,11 +97,6 @@ export default class boulderBall {
         else if (leftGoal) {
             this.goal(player2);
             this.direction = 1;
-
         }
-
     }
-
-
-
 }
