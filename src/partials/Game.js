@@ -1,9 +1,13 @@
 
-import Name from './Setup';
-import Score from './Score'
-import Ball from './Ball.js'
-import Board from './Board.js' //may also not put ".js" in it
-import Paddle from './Paddle.js'//
+//import Name from './Setup';
+
+
+
+import Steelball from './SteelBall';
+import Score from './Score';
+import Ball from './Ball.js';
+import Board from './Board.js'; //may also not put ".js" in it
+import Paddle from './Paddle.js';//
 import { SVG_NS, KEYS } from "../settings";
 export default class Game {
 
@@ -20,7 +24,12 @@ export default class Game {
 
 
 		this.board = new Board(this.width, this.height); //instantiate board
-		this.ball = new Ball(8, this.width, this.height);
+
+
+
+		this.ball = new Ball(8, 'red', this.width, this.height);
+		this.steelball = new Steelball(8, 'silver', this.width, this.height);
+
 
 
 
@@ -95,6 +104,7 @@ export default class Game {
 		this.player2.render(svg);
 
 		this.ball.render(svg, this.player1, this.player2);
+		this.steelball.render(svg, this.player1, this.player2);
 
 		this.score1.render(svg, this.player1.score);
 		this.score2.render(svg, this.player2.score);

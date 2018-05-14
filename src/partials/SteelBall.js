@@ -1,6 +1,6 @@
 import { SVG_NS } from '../settings';
 
-export default class Ball {
+export default class Steelball {
     constructor(radius, fill, boardWidth, boardHeight) {
         this.ping = new Audio("public/sounds/pong-01.wav");
         this.fill = fill;
@@ -20,7 +20,7 @@ export default class Ball {
         while (this.vy === 0) {
             this.vy = Math.floor(Math.random() * 10 - 5);
         }
-        this.vx = this.direction * (6 - Math.abs(this.vy));
+        this.vx = this.direction * (6 - Math.abs(this.vy)) / 5;
     }
 
     // Paddle Collision
@@ -45,7 +45,7 @@ export default class Ball {
             //...
         }
         if (this.vx < 0) {
-            //detect player2 paddle collision
+            //detect player1 paddle collision
             let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
             let [leftX, rightX, topY, bottomY] = paddle;
 
@@ -119,8 +119,9 @@ export default class Ball {
 
         // Make score Part 1/2
         // Detect goal
-        const rightGoal = this.x + this.radius >= this.boardWidth;
-        const leftGoal = this.x - this.radius <= 0;
+        const rightGoal = this.paddleCollision(player1, player2);
+
+        const leftGoal = this.paddleCollision(player1, player2);
 
         if (rightGoal) {
             this.goal(player1);
